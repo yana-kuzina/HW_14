@@ -6,11 +6,25 @@ const getAlbums = async () => {
 
   data.map(({ title }) => {
     let li = document.createElement("li");
-    li.innerHTML = title;
+    li.append(title);
     li.classList.add("albums");
+
+    const button = document.createElement("button");
+    button.className = "remove-button";
+    button.innerText = "Delete";
+    li.append(button);
 
     list.append(li);
   });
 };
 
 getAlbums();
+
+list.onclick = function (event) {
+  const isRemoveButton = event.target.className === "remove-button";
+
+  if (isRemoveButton) {
+    const li = event.target.closest("li");
+    li.remove();
+  }
+};
